@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        body{
+            background-color: rgba(104,100,180,0.5);
+        }
+        section{
+            border:1px solid red;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            padding:0.5rem;
+            width:90%;
+            border-radius:0.4rem 0.8rem;
+            min-height: 6rem;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* border:1px solid red; */
+            font-family: cursive;
+            font-weight: bold;
+            gap:1rem;
+            background-image:linear-gradient(to right,orange 0%,yellow 40%,lavender 70%);
+            font-size: 20px;
+        }
+        div#a1{
+            min-height:100px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            flex-wrap: wrap;
+            gap:4px 4px;
+            /* border:1px solid red; */
+            width:100%;
+            padding:6px;
+        }
+      div#a1 label{
+        /* border:1px solid red; */
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap:10px;
+            width:75px;
+            padding:10px;
+            
+        }
+        div#a1 label input{
+                border:none;
+                padding:5px;
+                border-radius: 20px;
+                font-weight: bold;
+                font-size: 22px;
+        }
+        fieldset{
+            min-height:80px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap:10px;
+            border-radius:30px;
+            border:10px double brown;
+
+        }
+        fieldset label{
+            padding:10px;
+        }
+        legend{
+            padding:5px;
+            text-decoration: underline;
+        }
+      
+    </style>
+</head>
+<body>
+    <section>
+       
+          <form>
+            <fieldset>
+            <legend>Check Your Age:</legend>
+            <label for="dob">
+                Your date-of-birth: &nbsp;&nbsp;
+                <!-- <input type="date" id="dob" required value="1995-04-18"> -->
+                <input type="date" id="dob" required>
+            </label>
+        </fieldset>
+            <!-- <label for="age" id="a1">
+                You are:
+                <input type="text" id="age" readonly size="2">
+            </label> -->
+            <div id="a1">
+                <label for="y1">
+                    <input type="text" id="y1" readonly size="2" value="0">
+                    <span>Years</span>
+                </label>
+
+                <label for="m1">
+                    <input type="text" id="m1" readonly size="2" value="0">
+                    <span>Months</span>
+                </label>
+
+                <label for="d1">
+                    <input type="text" id="d1" readonly size="2" value="0">
+                    <span>Days</span>
+                </label>
+
+                <!-- <label for="h1">
+                    <input type="text" id="h1" readonly size="2" value="0">
+                    <span>Hours</span>
+                </label>
+
+                <label for="min1">
+                    <input type="text" id="min1" readonly size="2" value="0">
+                    <span>Mins</span>
+                </label>
+
+                <label for="s1">
+                    <input type="text" id="s1" readonly size="2" value="0">
+                    <span>Secs</span>
+                </label> -->
+            </div>
+          </form>
+    </section>
+
+    <script>
+        let curdate = new Date();
+        console.log(curdate);
+
+        // let date1 = curdate.getDate();
+        // console.log(date1);
+        // let month1 = curdate.getMonth() + 1;
+        // console.log(month1);
+
+        // current year
+        let year1 = curdate.getFullYear();
+        console.log(year1);
+
+        let m1 = curdate.getMonth();
+        console.log(m1 + 1)
+
+        let d1 = curdate.getDate();
+        console.log(d1)
+
+        let dob = document.getElementById('dob');
+        console.log(dob.value)
+
+       
+
+        const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        
+        
+        let age = document.querySelectorAll('#a1 input');
+        
+        console.log(age);
+        
+        dob.addEventListener('input',()=>{
+            // data of birth
+            let dob2 = new Date(dob.value)
+            let byear = dob2.getFullYear();
+            console.log(byear);
+            
+            let m2 = dob2.getMonth() + 1;
+            console.log(m2);
+            
+            let d2 = dob2.getDate();
+            console.log(d2);
+            console.log( age[0])
+
+
+            //for year
+            age[0].value = year1 - byear;
+            
+
+            // fro months
+
+            age[1].value =  m1 - m2;
+
+            // for days
+            daysreminmymonth = Math.abs(d2 - months[m2 - 1]);
+            // console.log(Math.abs(d2 - months[m2 - 1])) 
+            
+            let br1 = m2 - 1;
+            let cr1 = m1;
+            console.log(br1,cr1)
+            let sum = 0 ;
+            
+            let em = [];
+                     for(i = 0; i < months.length; i++){
+                          if(i > br1 && i < m1){
+                            em.push(months[i]);
+                            sum += months[i];
+                          } 
+
+                        }
+                     // keep this change for future reference   
+                        // console.log(em,sum,daysreminmymonth,d1);
+                   
+                        //  daysreminmymonth += sum + d1;
+
+                        // console.log(daysreminmymonth)
+
+                        // age[2].value = daysreminmymonth;
+
+                        let e  = daysreminmymonth + d1;
+
+                        console.log(daysreminmymonth,d1,e)
+
+                        age[2].value = e ;
+                  
+                    })
+    </script>
+</body>
+</html>
